@@ -6,6 +6,11 @@ seaborn
 jupyter
 ipykernel
 
+python-box
+pyYAML
+ensure
+
 scikit-learn
+XGBoost
 
 streamlit

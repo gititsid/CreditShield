@@ -9,6 +9,7 @@ ipykernel
 python-box
 pyYAML
 ensure
+openpyxl
 
 scikit-learn
 XGBoost

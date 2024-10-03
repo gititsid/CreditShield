@@ -7,3 +7,12 @@ data_ingestion:
   unzip_dir: artifacts/data_ingestion
   internal_raw_file: artifacts/data_ingestion/case_study1.xlsx
   external_raw_file: artifacts/data_ingestion/case_study2.xlsx
+
+data_validation:
+  root_dir: artifacts/data_validation
+  internal_raw_file: artifacts/data_ingestion/case_study1.xlsx
+  external_raw_file: artifacts/data_ingestion/case_study2.xlsx
+  internal_file_val_status: artifacts/data_validation/internal_file_val_status.txt
+  external_file_val_status: artifacts/data_validation/external_file_val_status.txt
+
+

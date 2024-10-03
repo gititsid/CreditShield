@@ -10,3 +10,14 @@ class DataIngestionConfig:
     unzip_dir: Path
     internal_raw_file: Path
     external_raw_file: Path
+
+
+@dataclass(frozen=True)
+class DataValidationConfig:
+    root_dir: Path
+    internal_raw_file: Path
+    external_raw_file: Path
+    internal_file_val_status: Path
+    external_file_val_status: Path
+    internal_data_schema: dict
+    external_data_schema: dict

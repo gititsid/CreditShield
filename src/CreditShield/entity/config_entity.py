@@ -53,3 +53,11 @@ class ModelTrainingConfig:
     model_path: Path
 
 
+@dataclass(frozen=True)
+class ModelEvaluationConfig:
+    root_dir: Path
+    model_path: Path
+    experiment_name: str
+    train_metrics: Path
+    test_metrics: Path
+

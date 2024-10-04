@@ -9,7 +9,8 @@ from src.CreditShield.entity.config_entity import (DataIngestionConfig,
                                                    DataValidationConfig,
                                                    DataPreprocessingConfig,
                                                    DataTransformationConfig,
-                                                   ModelTrainingConfig)
+                                                   ModelTrainingConfig,
+                                                   ModelEvaluationConfig)
 
 
 class ConfigurationManager:
@@ -178,4 +179,31 @@ class ConfigurationManager:
         except Exception as e:
             if log:
                 logging.error(f"Error occurred while getting model training configuration!")
+            raise CustomException(e, sys)
+
+    def get_model_evaluation_config(self, log=True) -> ModelEvaluationConfig:
+        try:
+            if log:
+                logging.info("Getting model evaluation configuration:")
+
+            config = self.config.model_evaluation
+
+            create_directories([config.root_dir])
+
+            model_evaluation_config = ModelEvaluationConfig(
+                root_dir=config.root_dir,
+                model_path=config.model_path,
+                experiment_name=config.experiment_name,
+                train_metrics=config.train_metrics,
+                test_metrics=config.test_metrics
+            )
+
+            if log:
+                logging.info("Model evaluation configuration loaded successfully!")
+
+            return model_evaluation_config
+
+        except Exception as e:
+            if log:
+                logging.error(f"Error occurred while getting model evaluation configuration!")
             raise CustomException(e, sys)

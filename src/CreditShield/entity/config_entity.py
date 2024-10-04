@@ -43,3 +43,13 @@ class DataTransformationConfig:
     num_features: list
     target_variable: str
     data_transformer: Path
+
+
+@dataclass(frozen=True)
+class ModelTrainingConfig:
+    root_dir: Path
+    model_params: dict
+    experiment_name: str
+    model_path: Path
+
+

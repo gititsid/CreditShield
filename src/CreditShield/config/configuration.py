@@ -8,7 +8,8 @@ from src.CreditShield.utils.common import read_yaml, create_directories
 from src.CreditShield.entity.config_entity import (DataIngestionConfig,
                                                    DataValidationConfig,
                                                    DataPreprocessingConfig,
-                                                   DataTransformationConfig)
+                                                   DataTransformationConfig,
+                                                   ModelTrainingConfig)
 
 
 class ConfigurationManager:
@@ -16,13 +17,15 @@ class ConfigurationManager:
                  config_filepath=CONFIG_FILE_PATH,
                  internal_raw_data_schema_filepath=INTERNAL_RAW_DATA_SCHEMA_FILE_PATH,
                  external_raw_data_schema_filepath=EXTERNAL_RAW_DATA_SCHEMA_FILE_PATH,
-                 processed_data_schema_filepath=PROCESSED_DATA_SCHEMA_FILE_PATH
+                 processed_data_schema_filepath=PROCESSED_DATA_SCHEMA_FILE_PATH,
+                 params_filepath=PARAMS_FILE_PATH
                  ):
 
         self.config = read_yaml(config_filepath)
         self.internal_raw_data_schema = read_yaml(internal_raw_data_schema_filepath)
         self.external_raw_data_schema = read_yaml(external_raw_data_schema_filepath)
         self.processed_data_schema = read_yaml(processed_data_schema_filepath)
+        self.params = read_yaml(params_filepath)
 
         # Artifact root directory
         create_directories([self.config.artifacts_root])
@@ -148,4 +151,31 @@ class ConfigurationManager:
         except Exception as e:
             if log:
                 logging.error(f"Error occurred while getting data transformation configuration!")
+            raise CustomException(e, sys)
+
+    def get_model_training_config(self, log=True) -> ModelTrainingConfig:
+        try:
+            if log:
+                logging.info("Getting model training configuration:")
+
+            config = self.config.model_training
+            model_params = self.params.XGBClassifier
+
+            create_directories([config.root_dir])
+
+            model_training_config = ModelTrainingConfig(
+                root_dir=config.root_dir,
+                model_params=model_params,
+                experiment_name=config.experiment_name,
+                model_path=config.model_path
+            )
+
+            if log:
+                logging.info("Model training configuration loaded successfully!")
+
+            return model_training_config
+
+        except Exception as e:
+            if log:
+                logging.error(f"Error occurred while getting model training configuration!")
             raise CustomException(e, sys)

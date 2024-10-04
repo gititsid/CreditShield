@@ -27,4 +27,9 @@ data_transformation:
   preprocessed_dataset: artifacts/data_preprocessing/processed_data.csv
   data_transformer: artifacts/data_transformation/data_transformer.pkl
 
+model_training:
+  root_dir: artifacts/model_training
+  experiment_name: XGBoostClassifier
+  model_path: artifacts/model_training/model.pkl
+
 

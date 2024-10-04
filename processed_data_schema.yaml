@@ -1,0 +1,48 @@
+cat_features:
+  maritalstatus: object
+  gender: object
+  last_prod_enq2: object
+  first_prod_enq2: object
+
+num_features:
+  pct_tl_open_l6m: float64
+  pct_tl_closed_l6m: float64
+  tot_tl_closed_l12m: int64
+  pct_tl_closed_l12m: float64
+  tot_missed_pmnt: int64
+  cc_tl: int64
+  home_tl: int64
+  pl_tl: int64
+  secured_tl: int64
+  unsecured_tl: int64
+  other_tl: int64
+  age_oldest_tl: int64
+  age_newest_tl: int64
+  time_since_recent_payment: int64
+  max_recent_level_of_deliq: int64
+  num_deliq_6_12mts: int64
+  num_times_60p_dpd: int64
+  num_std_12mts: int64
+  num_sub: int64
+  num_sub_6mts: int64
+  num_sub_12mts: int64
+  num_dbt: int64
+  num_dbt_12mts: int64
+  num_lss: int64
+  recent_level_of_deliq: int64
+  cc_enq_l12m: int64
+  pl_enq_l12m: int64
+  time_since_recent_enq: int64
+  enq_l3m: int64
+  netmonthlyincome: int64
+  time_with_curr_empr: int64
+  cc_flag: int64
+  pl_flag: int64
+  pct_pl_enq_l6m_of_ever: float64
+  pct_cc_enq_l6m_of_ever: float64
+  hl_flag: int64
+  gl_flag: int64
+  education: int64
+
+target_variable:
+  approved_flag: object

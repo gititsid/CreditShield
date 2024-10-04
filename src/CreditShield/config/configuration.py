@@ -7,7 +7,8 @@ from src.CreditShield.exception import CustomException
 from src.CreditShield.utils.common import read_yaml, create_directories
 from src.CreditShield.entity.config_entity import (DataIngestionConfig,
                                                    DataValidationConfig,
-                                                   DataPreprocessingConfig)
+                                                   DataPreprocessingConfig,
+                                                   DataTransformationConfig)
 
 
 class ConfigurationManager:
@@ -118,3 +119,33 @@ class ConfigurationManager:
                 logging.error(f"Error occurred while getting data preprocessing configuration!")
             raise CustomException(e, sys)
 
+    def get_data_transformer_config(self, log=True) -> DataTransformationConfig:
+        try:
+            if log:
+                logging.info("Getting data transformation configuration:")
+
+            config = self.config.data_transformation
+            cat_features = self.processed_data_schema.cat_features
+            num_features = self.processed_data_schema.num_features
+            target_variable = self.processed_data_schema.target_variable
+
+            create_directories([config.root_dir])
+
+            data_transformation_config = DataTransformationConfig(
+                root_dir=config.root_dir,
+                preprocessed_dataset=config.preprocessed_dataset,
+                cat_features=cat_features,
+                num_features=num_features,
+                target_variable=target_variable,
+                data_transformer=config.data_transformer
+            )
+
+            if log:
+                logging.info("Data transformation configuration loaded successfully!")
+
+            return data_transformation_config
+
+        except Exception as e:
+            if log:
+                logging.error(f"Error occurred while getting data transformation configuration!")
+            raise CustomException(e, sys)

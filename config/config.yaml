@@ -22,6 +22,9 @@ data_preprocessing:
   cleaned_raw_dataset: artifacts/data_preprocessing/CreditRiskModelingData.csv
   preprocessed_dataset: artifacts/data_preprocessing/processed_data.csv
 
-
+data_transformation:
+  root_dir: artifacts/data_transformation
+  preprocessed_dataset: artifacts/data_preprocessing/processed_data.csv
+  data_transformer: artifacts/data_transformation/data_transformer.pkl
 
 

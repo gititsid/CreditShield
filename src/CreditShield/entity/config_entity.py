@@ -33,3 +33,13 @@ class DataPreprocessingConfig:
     cat_features: list
     num_features: list
     target_variable: str
+
+
+@dataclass(frozen=True)
+class DataTransformationConfig:
+    root_dir: Path
+    preprocessed_dataset: Path
+    cat_features: list
+    num_features: list
+    target_variable: str
+    data_transformer: Path

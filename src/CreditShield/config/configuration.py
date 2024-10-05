@@ -10,7 +10,8 @@ from src.CreditShield.entity.config_entity import (DataIngestionConfig,
                                                    DataPreprocessingConfig,
                                                    DataTransformationConfig,
                                                    ModelTrainingConfig,
-                                                   ModelEvaluationConfig)
+                                                   ModelEvaluationConfig,
+                                                   PredictionConfig)
 
 
 class ConfigurationManager:
@@ -206,4 +207,27 @@ class ConfigurationManager:
         except Exception as e:
             if log:
                 logging.error(f"Error occurred while getting model evaluation configuration!")
+            raise CustomException(e, sys)
+
+    def get_prediction_config(self, log=True) -> PredictionConfig:
+        try:
+            if log:
+                logging.info("Getting prediction configuration:")
+
+            config = self.config.prediction
+
+            prediction_config = PredictionConfig(
+                model_path=config.model_path,
+                experiment_name=config.experiment_name,
+                data_transformer=config.data_transformer
+            )
+
+            if log:
+                logging.info("Prediction configuration loaded successfully!")
+
+            return prediction_config
+
+        except Exception as e:
+            if log:
+                logging.error(f"Error occurred while getting prediction configuration!")
             raise CustomException(e, sys)
